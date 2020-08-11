@@ -1,0 +1,132 @@
+var data = {
+  "counters":
+  [
+    {
+      "_id": "53373f538126b69273039245",
+      "adjClose": 26.52,
+      "close": "10",
+      "date": "2013-04-15T03:00:00.000Z",
+      "high": 27.48,
+      "low": 26.36,
+      "open": 27.16,
+      "symbol": "fb",
+      "volume": 30275400
+    },
+    {
+      "_id": "53373f538126b69273039246",
+      "adjClose": 26.92,
+      "close": "20",
+      "date": "2013-04-16T03:00:00.000Z",
+      "high": 27.11,
+      "low": 26.4,
+      "open": 26.81,
+      "symbol": "fb",
+      "volume": 27365900
+    },
+    {
+      "_id": "53373f538126b69273039247",
+      "adjClose": 26.63,
+      "close": "30",
+      "date": "2013-04-17T03:00:00.000Z",
+      "high": 27.2,
+      "low": 26.39,
+      "open": 26.65,
+      "symbol": "fb",
+      "volume": 26440600
+    },
+    {
+      "_id": "53373f538126b69273039245",
+      "adjClose": 26.52,
+      "close": "40",
+      "date": "2013-04-15T03:00:00.000Z",
+      "high": 27.48,
+      "low": 26.36,
+      "open": 27.16,
+      "symbol": "fb",
+      "volume": 30275400
+    },
+    {
+      "_id": "53373f538126b69273039245",
+      "adjClose": 26.52,
+      "close": "50",
+      "date": "2013-04-15T03:00:00.000Z",
+      "high": 27.48,
+      "low": 26.36,
+      "open": 27.16,
+      "symbol": "fb",
+      "volume": 30275400
+    },
+    {
+      "_id": "53373f538126b69273039245",
+      "adjClose": 26.52,
+      "close": "60",
+      "date": "2013-04-15T03:00:00.000Z",
+      "high": 27.48,
+      "low": 26.36,
+      "open": 27.16,
+      "symbol": "fb",
+      "volume": 30275400
+    },
+    {
+      "_id": "53373f538126b69273039245",
+      "adjClose": 26.52,
+      "close": "70",
+      "date": "2013-04-15T03:00:00.000Z",
+      "high": 27.48,
+      "low": 26.36,
+      "open": 27.16,
+      "symbol": "fb",
+      "volume": 30275400
+    },
+    {
+      "_id": "53373f538126b69273039245",
+      "adjClose": 26.52,
+      "close": "80",
+      "date": "2013-04-15T03:00:00.000Z",
+      "high": 27.48,
+      "low": 26.36,
+      "open": 27.16,
+      "symbol": "fb",
+      "volume": 30275400
+    },
+  ]
+};
+var data2 = ["12","16","14","13","11","10","9","11","23"];
+var dataAratoplam=0;
+var dataAratoplam2=0;
+var result=[];
+for(var i=0; i<data2.length; i++) {
+  result.push(data2[i]);
+  dataAratoplam+=data2[i];
+}
+
+var myJSON = JSON.stringify(data);
+var jsonData = JSON.parse(myJSON);
+for (var i = 0; i < jsonData.counters.length; i++) {
+    var counter = jsonData.counters[i];
+    dataAratoplam2+=Number(counter.close);
+    console.log(counter.close);
+}
+console.log("counter.date",dataAratoplam2);
+
+
+// Load the data
+var t     = new timeseries.main(timeseries.adapter.fromDB(data, {
+value:  'close'     // Name of the property containign the value. here we'll use the "close" price.
+}));
+
+// We're going to forecast the 11th datapoint
+var forecastDatapoint   = 11;   
+
+// We calculate the AR coefficients of the 10 previous points
+var coeffs = t.ARMaxEntropy({degree: 7});
+
+// Output the coefficients to the console
+//console.log(coeffs);
+
+// Now, we calculate the forecasted value of that 11th datapoint using the AR coefficients:
+var forecast    = 0;    // Init the value at 0.
+for (var i=0;i<coeffs.length;i++) { // Loop through the coefficients
+    //forecast -= t.data[7-i][1]*coeffs[i];
+    }
+//console.log("forecast",forecast);
